@@ -20,7 +20,7 @@ const Venue = ({ locations }) => {
                 </div>
                 <div className={styles.footer}>
                     <h3 className={styles.footerTitle}>Підтвердження присутності</h3>
-                    <p className={styles.footerText}>Будь ласка, надайте відповідь про вашу присутність на весіллі до 10 серпня</p>
+                    <p className={styles.footerText}>Будь ласка, надайте відповідь про вашу присутність на весіллі до 10 серпня!</p>
                 </div>
             </div>
         </section>

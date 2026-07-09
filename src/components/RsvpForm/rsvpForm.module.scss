@@ -43,7 +43,6 @@
 
     .title {
         @include m.title-base(v.$color-text-accent-gold);
-        text-shadow: 2px 2px 4px v.$color-shadow;
     }
 
     .form {

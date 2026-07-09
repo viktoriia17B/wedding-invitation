@@ -12,7 +12,7 @@ $font-main: 'Montserrat', sans-serif;
 $font-accent: 'Marck Script', cursive;
 $font-serif: 'Cormorant Garamond', serif;
 // Адаптивні розміри (ваші clamp)
-$size-title: clamp(2rem, 5dvw, 3rem);
+$size-title: clamp(2rem, 5dvw, 3.5rem);
 $size-subtitle: clamp(1.9rem, 4dvw, 2.6rem);
 $size-names: clamp(1.5rem, 7dvw, 4.5rem);
 $size-text-accent: clamp(1.1rem, 2.8dvw, 1.4rem);
