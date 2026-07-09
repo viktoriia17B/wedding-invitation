@@ -1,0 +1,61 @@
+@use '../../styles/mixins' as m;
+@use '../../styles/variables' as v;
+
+@keyframes wingFlap {
+    0% {
+        // Початковий стан: крила трохи розгорнуті на глядача
+        transform: perspective(600px) rotateY(-20deg) scale(0.95);
+    }
+
+    100% {
+        // Кінцевий стан: крила махають вглиб (назад)
+        transform: perspective(600px) rotateY(35deg) scale(1.05);
+    }
+}
+
+.welcome {
+    @include m.section-overlay;
+
+    .container {
+        @include m.content-layout;
+        position: relative;
+        z-index: 2;
+    }
+
+    .title {
+        @include m.title-base(v.$color-text-main);
+    }
+
+    .icon {
+        display: block;
+        margin: auto;
+        width: 60%;
+        height: auto;
+        opacity: 0.6;
+        transform-origin: center center;
+        animation: wingFlap 2.5s ease-in-out infinite alternate;
+        // Захист від розмиття картинки при масштабуванні браузером
+        will-change: transform, opacity;
+
+        &:hover {
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+    }
+
+    .text {
+        @include m.section-block($margin-top: auto);
+        background-color: rgba(36, 48, 29, 0.2); // Темніший зелений підтон для об'єму
+        border-radius: 12px;
+        max-width: clamp(280px, 66vw, 659px);
+        transform: translateY(-50px);
+        @include m.accent-text-base($font: v.$font-serif,
+            $size: v.$size-subtitle,
+            $color: v.$color-text-light,
+            $shadow: 2px 2px 4px v.$color-shadow );
+        padding: clamp(20px, 3.5vw, 50px);
+        font-style: italic;
+        text-wrap: balance;
+
+    }
+}

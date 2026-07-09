@@ -1,0 +1,18 @@
+$color-text-light: #eae5d9;
+$color-white: #ffffff;
+$color-bg-light: #f4f1ea;
+$color-shadow: rgba(0, 0, 0, 0.7);
+$color-deep-green: #04410e;
+$color-light-green: #59704a;
+$color-text-main: #f4f6f0; // основний текст
+$color-text-accent-gold: #e1c28f; // акцент
+$color-error: #e57373;
+// Шрифти
+$font-main: 'Montserrat', sans-serif;
+$font-accent: 'Marck Script', cursive;
+$font-serif: 'Cormorant Garamond', serif;
+// Адаптивні розміри (ваші clamp)
+$size-title: clamp(2rem, 5dvw, 3rem);
+$size-subtitle: clamp(1.9rem, 4dvw, 2.6rem);
+$size-names: clamp(1.5rem, 7dvw, 4.5rem);
+$size-text-accent: clamp(1.1rem, 2.8dvw, 1.4rem);

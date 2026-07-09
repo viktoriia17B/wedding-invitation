@@ -1,0 +1,99 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+.countdown {
+    @include m.fullscreen-layout();
+
+    .content {
+        @include m.content-layout;
+    }
+
+    .top {
+        @include m.section-block($margin-bottom: auto);
+        justify-content: flex-start;
+        padding-top: clamp(12px, 3vh, 15px);
+    }
+
+    .subtitle {
+        @include m.title-base(v.$color-deep-green);
+        text-shadow: 2px 2px 4px v.$color-shadow;
+        margin: 0;
+    }
+
+    .date {
+        @include m.accent-text-base($size: v.$size-subtitle,
+            $shadow: 2px 3px 8px v.$color-shadow);
+        font-weight: 300;
+        letter-spacing: 0;
+        margin: 0;
+    }
+
+    .center {
+        @include m.section-block();
+    }
+
+    .names {
+        @include m.accent-text-base($shadow: 2px 4px 10px v.$color-shadow);
+        margin: 0;
+        text-align: center;
+    }
+
+    .bottom {
+        @include m.section-block($margin-top: auto);
+    }
+
+    .welcome {
+        @include m.accent-text-base($font: v.$font-serif,
+            $size: clamp(1.4rem, 3vh, 1.5rem),
+            $shadow: 2px 2px 4px v.$color-shadow);
+        font-style: italic;
+        margin-top: 0;
+        margin-bottom: 15px; // Відступ до таймера
+    }
+
+    .timer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: clamp(4px, 1.5vh, 20px); // Відстань між блоками часу
+        width: 100%;
+        padding: 0 clamp(8px, 3vw, 16px); // відступи від країв
+        box-sizing: border-box;
+    }
+
+    .timeBlock {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        min-width: 0;
+        max-width: clamp(60px, 22vw, 110px);
+        background: rgba(20, 36, 28, 0.06);
+        border: 1px solid rgba(244, 241, 234, 0.2);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: clamp(10px, 2vw, 18px) clamp(4px, 1.5vw, 10px);
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .timeValue {
+        font-family: v.$font-main;
+        font-size: clamp(1.6rem, 4vw, 2.5rem);
+        font-weight: 400; // Тонкі витончені цифри
+        line-height: 1;
+        margin-bottom: 6px;
+        color: v.$color-white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .timeLabel {
+        font-family: v.$font-serif;
+        font-weight: 300;
+        font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: rgba(255, 255, 255, 0.8);
+    }
+}

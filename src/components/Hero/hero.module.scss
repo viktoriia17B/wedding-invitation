@@ -1,0 +1,93 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+@keyframes forestFade {
+    0% {
+        opacity: 0;
+        filter: blur(12px);
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+    }
+}
+
+// Анімація легкого погойдування кнопки 
+@keyframes buttonPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
+}
+
+.hero {
+    @include m.section-overlay;
+
+    .content {
+        @include m.content-layout;
+        position: relative; // Без relative z-index не працюватиме!
+        z-index: 2; // Ставимо поверх фону (який має індекс 1)
+
+    }
+
+    .top {
+        @include m.section-block($margin-bottom: auto);
+        justify-content: flex-start;
+        padding-top: clamp(12px, 3vh, 24px);
+    }
+
+    .title {
+        @include m.title-base();
+    }
+
+    .center {
+        @include m.section-block();
+        animation: forestFade 2.5s ease-out 0.4s forwards;
+        opacity: 0; // Для плавної появи з анімації
+    }
+
+    .names {
+        @include m.accent-text-base();
+        font-weight: 300;
+        letter-spacing: 2px;
+    }
+
+    .footer {
+        @include m.section-block($margin-top: auto);
+        animation: forestFade 1.5s ease-out 1s forwards;
+        opacity: 0;
+    }
+
+    .btn {
+        @include m.button-base();
+        background-color: v.$color-bg-light;
+        color: #1b2e24; // Темний колір тексту за замовчуванням
+        padding: 16px clamp(32px, 3vw, 48px);
+        font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+        letter-spacing: 1px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        // Додаємо transform у загальний список transition
+        transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+            // Додаткові ефекти підстрибування та пульсації тільки для Hero!
+            animation: buttonPulse 2s ease-in-out infinite;
+            background-color: #e2ded5;
+            box-shadow: 0 0 20px rgba(244, 241, 234, 0.4);
+            transform: translateY(-2px);
+            color: #1b2e24; // Зберігаємо колір тексту
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+}

@@ -1,0 +1,40 @@
+import { useState, useEffect } from "react";
+import { calculateTimeLeft } from "../../utils/timeUtils";
+import styles from './countDown.module.scss'
+const CountDown = ({ subtitle, names, targetDate, backgroundImg }) => {
+    const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft(targetDate));
+    useEffect(() => {
+        let timer = setInterval(() => setTimeLeft(calculateTimeLeft(targetDate)), 1000);
+        return () => clearInterval(timer)
+    }, [targetDate]);
+
+    const units = [
+        { id: 'days', value: timeLeft.days, label: 'днів' },
+        { id: 'hours', value: timeLeft.hours, label: 'годин' },
+        { id: 'minutes', value: timeLeft.minutes, label: 'хвилин' },
+        { id: 'seconds', value: timeLeft.seconds, label: 'секунд' }];
+
+    return (
+        <section className={styles.countdown} style={{ '--bg-image': `url(${backgroundImg})` }}>
+            <div className={styles.content}>
+                <div className={styles.top}>
+                    <p className={styles.subtitle}>{subtitle}</p>
+                    <p className={styles.date}>{targetDate.split('-').reverse().join('.')}</p>
+                </div>
+                <div className={styles.center}> <h2 className={styles.names}>{names}</h2>
+                </div>
+                <div className={styles.bottom}>
+                    <p className={styles.welcome}>Побачимось з вами через...</p>
+                    <div className={styles.timer}>
+                        {units.map(unit => (<div className={styles.timeBlock} key={unit.id}>
+                            <span className={styles.timeValue}>{unit.value}</span>
+                            <span className={styles.timeLabel}>{unit.label}</span>
+                        </div>))}
+                    </div>
+
+                </div>
+            </div>
+        </section >
+    )
+};
+export default CountDown;
