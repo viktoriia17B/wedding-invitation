@@ -55,9 +55,7 @@
     }
 
     .names {
-        @include m.accent-text-base();
-        font-weight: 300;
-        letter-spacing: 2px;
+        @include m.accent-text-base($shadow: 2px 4px 10px v.$color-shadow);
     }
 
     .footer {

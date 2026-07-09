@@ -31,6 +31,7 @@
     box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
+    padding: 0 4px;
 }
 
 @mixin button-base($color: v.$color-bg-light) {

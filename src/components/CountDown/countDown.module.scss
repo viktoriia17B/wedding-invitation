@@ -35,7 +35,6 @@
     .names {
         @include m.accent-text-base($shadow: 2px 4px 10px v.$color-shadow);
         margin: 0;
-        text-align: center;
     }
 
     .bottom {

@@ -71,8 +71,7 @@
 
     // приховала лейбел
     .groupLabel {
-        @include m.accent-text-base($size: v.$size-subtitle, $color: v.$color-text-accent-gold);
-        font-size: clamp(1.3rem, 4dvw, 1.8rem);
+        @include m.accent-text-base($font: v.$font-serif, $size: v.$size-text-accent, $color: v.$color-text-accent-gold);
         letter-spacing: 2px;
         margin-bottom: 15px;
     }
