@@ -83,8 +83,8 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         padding: 12px 8px;
         color: v.$color-text-main;
-        font-family: v.$font-main;
-        font-size: 1.15rem;
+        font-family: v.$font-accent;
+        font-size: v.$size-text-accent;
         text-align: center;
         outline: none;
         transition: border-color 0.3s ease;
@@ -179,5 +179,9 @@
 
     p {
         @include m.accent-text-base($size: v.$size-text-accent, $color: v.$color-text-accent-gold)
+    }
+
+    .scrollTrigger {
+        @include m.scroll-trigger;
     }
 }

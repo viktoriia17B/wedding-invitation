@@ -33,8 +33,8 @@
     }
 
     .names {
-        @include m.accent-text-base($shadow: 2px 4px 10px v.$color-shadow);
-        margin: 0;
+        @include m.accent-text-base($shadow: 2px 4px 10px v.$color-text-accent-gold);
+        font-weight: 400;
     }
 
     .bottom {
@@ -43,7 +43,7 @@
 
     .welcome {
         @include m.accent-text-base($font: v.$font-serif,
-            $size: clamp(1.4rem, 3vh, 1.5rem),
+            $size: v.$size-subtitle,
             $shadow: 2px 2px 4px v.$color-shadow);
         font-style: italic;
         margin-top: 0;
@@ -94,5 +94,9 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         color: rgba(255, 255, 255, 0.8);
+    }
+
+    .scrollTrigger {
+        @include m.scroll-trigger;
     }
 }

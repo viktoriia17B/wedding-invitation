@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
+import { forwardRef } from "react";
 import { calculateTimeLeft } from "../../utils/timeUtils";
+import { useScrollTrigger } from "../../hooks/useScrollTrigger";
 import styles from './countDown.module.scss'
-const CountDown = ({ subtitle, names, targetDate, backgroundImg }) => {
+const CountDown = forwardRef(({ subtitle, names, targetDate, backgroundImg, scrollTargetRef }, ref) => {
     const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft(targetDate));
     useEffect(() => {
         let timer = setInterval(() => setTimeLeft(calculateTimeLeft(targetDate)), 1000);
         return () => clearInterval(timer)
     }, [targetDate]);
-
+    const [triggerRef] = useScrollTrigger({ scrollTargetRef });
     const units = [
         { id: 'days', value: timeLeft.days, label: 'днів' },
         { id: 'hours', value: timeLeft.hours, label: 'годин' },
@@ -15,7 +17,7 @@ const CountDown = ({ subtitle, names, targetDate, backgroundImg }) => {
         { id: 'seconds', value: timeLeft.seconds, label: 'секунд' }];
 
     return (
-        <section className={styles.countdown} style={{ '--bg-image': `url(${backgroundImg})` }}>
+        <section ref={ref} className={styles.countdown} style={{ '--bg-image': `url(${backgroundImg})` }}>
             <div className={styles.content}>
                 <div className={styles.top}>
                     <p className={styles.subtitle}>{subtitle}</p>
@@ -31,10 +33,10 @@ const CountDown = ({ subtitle, names, targetDate, backgroundImg }) => {
                             <span className={styles.timeLabel}>{unit.label}</span>
                         </div>))}
                     </div>
-
                 </div>
+                <div ref={triggerRef} className={styles.scrollTrigger} />
             </div>
         </section >
     )
-};
+});
 export default CountDown;

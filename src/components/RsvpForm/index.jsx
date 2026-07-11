@@ -1,13 +1,27 @@
-import { useState } from "react";
+import { forwardRef } from "react";
+import { useScrollTrigger } from "../../hooks/useScrollTrigger";
+import { useState, useRef, useEffect } from "react";
 import styles from './rsvpForm.module.scss';
 import { ATTENDANCE_OPTIONS, ALCOHOL_OPTIONS } from "./rsvpOptions";
-const RsvpForm = ({ endpoint }) => {
+const RsvpForm = forwardRef(({ endpoint, scrollTargetRef }, ref) => {
+    const [triggerRef] = useScrollTrigger({ scrollTargetRef });
+    const nameInputRef = useRef(null);
     const [formData, setFormData] = useState({
         name: '',
         attending: 'yes',
         alcohol: []
     });
     const [status, setStatus] = useState('idle');
+    useEffect(() => {
+        if (formData.attending === 'no') {
+            nameInputRef.current?.focus();
+        }
+        if (formData.attending === 'yes' && formData.alcohol.length > 0) {
+            setTimeout(() => {
+                nameInputRef.current?.focus();
+            }, 300)
+        }
+    }, [formData.attending, formData.alcohol])
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
@@ -37,17 +51,12 @@ const RsvpForm = ({ endpoint }) => {
         </div>)
     }
     return (
-        <section className={styles.rsvp}>
+        <section ref={ref} className={styles.rsvp}>
             <div className={styles.content}>
                 <div className={styles.top}>
                     <h2 className={styles.title}>Анкета гостя</h2>
                 </div>
                 <form className={styles.form} onSubmit={handleSubmit}>
-                    <div className={styles.formGroup}>
-                        <label htmlFor="name" className={styles.visuallyHidden}>Ваше ім'я та прізвище</label>
-                        <input type='text' id="name" name="name" required className={styles.inputField} value={formData.name}
-                            onChange={handleChange} placeholder="Ваше ім'я та прізвище" />
-                    </div>
                     <div className={styles.formGroup}>
                         <p className={styles.groupLabel}>Чи зможете розділити з нами цей день?</p>
                         <div className={styles.container}>
@@ -74,13 +83,19 @@ const RsvpForm = ({ endpoint }) => {
                                 </div>
                             </div>
                         )}
+                        <div className={styles.formGroup}>
+                            <label htmlFor="name" className={styles.visuallyHidden}>Ваше ім'я</label>
+                            <input ref={nameInputRef} type='text' id="name" name="name" required className={styles.inputField} value={formData.name}
+                                onChange={handleChange} placeholder="Ваше ім'я" />
+                        </div>
                     </div>
                     <button className={styles.btn} type='submit' disabled={status === 'sending'}>
                         {status === 'sending' ? 'Надсилаємо...' : 'ВІдправити'}</button>
                     {status === 'error' && (<p className={styles.error}>Щось пішло не так. Спробуйте пізніше.</p>)}
                 </form>
+                <div ref={triggerRef} className={styles.scrollTrigger} />
             </div>
         </section>
     )
-};
+});
 export default RsvpForm;

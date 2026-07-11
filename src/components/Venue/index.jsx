@@ -1,8 +1,11 @@
-import styles from './venue.module.scss';
+import { forwardRef } from 'react';
 import { getMapLink } from '../../utils/getMapLink';
-const Venue = ({ locations }) => {
+import { useScrollTrigger } from '../../hooks/useScrollTrigger';
+import styles from './venue.module.scss';
+const Venue = forwardRef(({ locations, scrollTargetRef }, ref) => {
+    const [triggerRef] = useScrollTrigger({ scrollTargetRef })
     return (
-        <section className={styles.venue}>
+        <section ref={ref} className={styles.venue}>
             <div className={styles.content}>
                 <div className={styles.top}>
                     <h2 className={styles.title}>Місце проведення</h2>
@@ -22,8 +25,9 @@ const Venue = ({ locations }) => {
                     <h3 className={styles.footerTitle}>Підтвердження присутності</h3>
                     <p className={styles.footerText}>Будь ласка, надайте відповідь про вашу присутність на весіллі до 10 серпня!</p>
                 </div>
+                <div ref={triggerRef} className={styles.scrollTrigger} />
             </div>
         </section>
     )
-};
+});
 export default Venue;

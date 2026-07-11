@@ -1,6 +1,20 @@
 @use '../../styles/mixins' as m;
 @use '../../styles/variables' as v;
 
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.04); // Легке, елегантне збільшення на 4%
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 .finalScreen {
     @include m.fullscreen-layout();
 
@@ -12,16 +26,10 @@
 
     .title {
         @include m.title-base(v.$color-text-main);
-        opacity: 0;
-        transform: scale(0.92);
-        transition: opacity 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s,
-            transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s;
+        animation: pulse 2.5s ease-in-out infinite;
+
+        // Вказуємо браузеру оптимізувати цей елемент під GPU-анімацію
+        will-change: transform;
     }
 
-    &.animate {
-        .title {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
 }

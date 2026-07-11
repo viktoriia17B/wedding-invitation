@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
+import { useAudio } from './hooks/useAudio';
 import { DATA } from './data';
 import Hero from './components/Hero';
 import BtnPage from './components/BtnPage';
@@ -12,50 +13,21 @@ const { title, subtitle, couple, date, endpoint, greeting, locations, images: { 
 const invertedNames = reverseCouple(couple);
 
 function App() {
-  const nextSectionRef = useRef(null);
-  const audioRef = useRef(null);
-  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
-  const [showMusicBtn, setShowMusicBtn] = useState(false);
-  const handleStartScroll = () => {
-    if (nextSectionRef.current) {
-      nextSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    if (!audioRef.current) {
-      audioRef.current = new Audio(bgMusic);
-      audioRef.current.loop = true; // Музика буде повторюватися по колу
-      audioRef.current.volume = 0.5; //Гучність на 50%
-    }
-    audioRef.current.play()
-      .then(() => {
-        setIsMusicPlaying(true);
-        setShowMusicBtn(true);
-      })
-      .catch(err => {
-        console.log('Браузер заблокував', err);
-        setShowMusicBtn(true);
-      });
-  };
-  const toggleMusic = () => {
-    if (!audioRef.current) return
-    if (isMusicPlaying) {
-      audioRef.current.pause();
-      setIsMusicPlaying(false);
-    } else {
-      audioRef.current.play();
-      setIsMusicPlaying(true);
-    }
-  };
+  const countDownRef = useRef(null);
+  const welcomeRef = useRef(null);
+  const venueRef = useRef(null);
+  const rsvpRef = useRef(null);
+  const finalRef = useRef(null);
+  const { isPlaying, showBtn, playAudio, toggleAudio } = useAudio(bgMusic);
   return (
     <div>
-      {showMusicBtn && <BtnPage isPlaying={isMusicPlaying} onToggle={toggleMusic} />}
-      <Hero title={title} name={couple} backgroundImg={base} onStart={handleStartScroll} />
-      <div ref={nextSectionRef}>
-        <CountDown subtitle={subtitle} names={invertedNames} targetDate={date} backgroundImg={hero} />
-      </div>
-      <Welcome title={greeting.title} text={greeting.text} backgroundImg={base} iconImg={icon} />
-      <Venue locations={locations} />
-      <RsvpForm endpoint={endpoint} />
-      <FinalScreen backgroundImg={story} />
+      {showBtn && <BtnPage isPlaying={isPlaying} onToggle={toggleAudio} />}
+      <Hero title={title} name={couple} backgroundImg={base} nextSectionRef={countDownRef} onPlayAudio={playAudio} />
+      <CountDown ref={countDownRef} subtitle={subtitle} names={invertedNames} targetDate={date} backgroundImg={hero} scrollTargetRef={welcomeRef} />
+      <Welcome ref={welcomeRef} title={greeting.title} text={greeting.text} backgroundImg={base} iconImg={icon} scrollTargetRef={venueRef} />
+      <Venue ref={venueRef} locations={locations} scrollTargetRef={rsvpRef} />
+      <RsvpForm ref={rsvpRef} endpoint={endpoint} scrollTargetRef={finalRef} />
+      <FinalScreen ref={finalRef} backgroundImg={story} />
     </div>
   )
 }

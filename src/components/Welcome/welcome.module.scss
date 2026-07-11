@@ -44,7 +44,8 @@
     }
 
     .text {
-        @include m.section-block($margin-top: auto);
+        @include m.section-block();
+        margin-top: clamp(20px, 10vh, 100px);
         background-color: rgba(36, 48, 29, 0.2); // Темніший зелений підтон для об'єму
         border-radius: 12px;
         max-width: clamp(280px, 66vw, 659px);
@@ -53,9 +54,12 @@
             $size: v.$size-subtitle,
             $color: v.$color-text-light,
             $shadow: 2px 2px 4px v.$color-shadow );
-        padding: clamp(20px, 3.5vw, 50px);
         font-style: italic;
         text-wrap: balance;
 
+    }
+
+    .scrollTrigger {
+        @include m.scroll-trigger;
     }
 }
