@@ -19,7 +19,7 @@ const RsvpForm = forwardRef(({ endpoint, backgroundImg }, ref) => {
         if (formData.attending === 'yes' && formData.alcohol.length > 0) {
             setTimeout(() => {
                 nameInputRef.current?.focus();
-            }, 300)
+            }, 200)
         }
     }, [formData.attending, formData.alcohol])
     const handleChange = (e) => {
@@ -48,10 +48,15 @@ const RsvpForm = forwardRef(({ endpoint, backgroundImg }, ref) => {
 
     return (
         <section ref={ref} className={styles.rsvp}>
-            {status === 'sent' ? (<FinalScreen backgroundImg={backgroundImg} attending={formData.attending} />) : (
+            {status === 'sent' ? (<FinalScreen backgroundImg={backgroundImg} {...formData} />) : (
                 <div className={styles.content}>
                     <div className={styles.top}>
                         <h2 className={styles.title}>Анкета гостя</h2>
+                    </div>
+                    <div className={styles.formGroup}>
+                        <label htmlFor="name" className={styles.visuallyHidden}>Ваше ім'я</label>
+                        <input ref={nameInputRef} type='text' id="name" name="name" required className={styles.inputField} value={formData.name}
+                            onChange={handleChange} placeholder="Ваше ім'я" />
                     </div>
                     <form className={styles.form} onSubmit={handleSubmit}>
                         <div className={styles.formGroup}>
@@ -59,7 +64,8 @@ const RsvpForm = forwardRef(({ endpoint, backgroundImg }, ref) => {
                             <div className={styles.container}>
                                 {ATTENDANCE_OPTIONS.map(opt => (
                                     <label key={opt.value} className={`${styles.field} ${formData.attending === opt.value ? styles.active : ''}`}>
-                                        <input type="radio" name="attending" value={opt.value} checked={formData.attending === opt.value} onChange={handleChange} />
+                                        <input type="radio" name="attending" value={opt.value}
+                                            checked={formData.attending === opt.value} onChange={handleChange} />
                                         {opt.label}
                                     </label>
                                 ))}
@@ -80,11 +86,6 @@ const RsvpForm = forwardRef(({ endpoint, backgroundImg }, ref) => {
                                     </div>
                                 </div>
                             )}
-                            <div className={styles.formGroup}>
-                                <label htmlFor="name" className={styles.visuallyHidden}>Ваше ім'я</label>
-                                <input ref={nameInputRef} type='text' id="name" name="name" required className={styles.inputField} value={formData.name}
-                                    onChange={handleChange} placeholder="Ваше ім'я" />
-                            </div>
                         </div>
                         <button className={styles.btn} type='submit' disabled={status === 'sending'}>
                             {status === 'sending' ? 'Надсилаємо...' : 'ВІдправити'}</button>

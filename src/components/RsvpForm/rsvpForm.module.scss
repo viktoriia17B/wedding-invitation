@@ -46,8 +46,8 @@
     }
 
     .form {
-        @include m.section-block($margin-top: auto);
-        gap: clamp(24px, 2.7dvw, 40px);
+        @include m.section-block();
+        gap: 16px;
         max-width: clamp(320px, 65vw, 560px);
     }
 
@@ -82,8 +82,8 @@
         border: none;
         border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         padding: 12px 8px;
-        color: v.$color-text-main;
-        font-family: v.$font-accent;
+        color: v.$color-white;
+        font-family: v.$font-main;
         font-size: v.$size-text-accent;
         text-align: center;
         outline: none;
