@@ -25,7 +25,7 @@
     }
 
     .title {
-        @include m.title-base(v.$color-text-main);
+        @include m.accent-text-base($size: v.$size-subtitle, $color: v.$color-text-main);
         animation: pulse 2.5s ease-in-out infinite;
 
         // Вказуємо браузеру оптимізувати цей елемент під GPU-анімацію

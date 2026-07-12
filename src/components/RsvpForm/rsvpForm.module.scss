@@ -166,20 +166,6 @@
         width: 100%;
         max-width: 100%;
     }
-}
-
-.thanks {
-    @include m.section-block($margin-bottom: 40px, $margin-top: 40px);
-    padding: clamp(30px, 6vw, 60px) clamp(20px, 4vw, 40px); // Адаптивні падінги, щоб картка подяки тримала форму
-    background-color: v.$color-light-green;
-    ;
-    border: 1px solid rgba(225, 194, 143, 0.3); // Легке золото на контурі
-    border-radius: 16px;
-    animation: scaleUpAppear 0.5s ease-in-out forwards;
-
-    p {
-        @include m.accent-text-base($size: v.$size-text-accent, $color: v.$color-text-accent-gold)
-    }
 
     .scrollTrigger {
         @include m.scroll-trigger;

@@ -5,7 +5,7 @@ const FinalScreen = forwardRef(({ backgroundImg, attending }, ref) => {
         <section ref={ref} className={styles.finalScreen}
             style={{ '--bg-image': `url(${backgroundImg})` }}>
             <div className={styles.content}>
-                <h2 className={styles.title}>Чекаємо на Вас!</h2>
+                <h2 className={styles.title}>{attending === 'yes' ? 'Чекаємо на Вас із нетерпінням!' : 'Обіймаємо та дякуємо за відповідь!'}</h2>
             </div>
         </section >
     )
