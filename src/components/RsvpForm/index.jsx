@@ -12,14 +12,19 @@ const RsvpForm = forwardRef(({ endpoint, backgroundImg }, ref) => {
         alcohol: []
     });
     const [status, setStatus] = useState('idle');
+    const hasFocusedForAlcohol = useRef(false); // реф, що зберігається між рендерами без запуску ре-рендеру;
     useEffect(() => {
         if (formData.attending === 'no') {
+            nameInputRef.current.focus();
+        }
+    }, [formData.attending]);
+    useEffect(() => {
+        if (formData.attending === 'yes' && formData.alcohol.length > 0 && !hasFocusedForAlcohol.current) {
+            hasFocusedForAlcohol.current = true;
             nameInputRef.current?.focus();
         }
-        if (formData.attending === 'yes' && formData.alcohol.length > 0) {
-            setTimeout(() => {
-                nameInputRef.current?.focus();
-            }, 200)
+        if (formData.alcohol.length === 0) {
+            hasFocusedForAlcohol.current = false;
         }
     }, [formData.attending, formData.alcohol])
     const handleChange = (e) => {
@@ -86,6 +91,7 @@ const RsvpForm = forwardRef(({ endpoint, backgroundImg }, ref) => {
                                     </div>
                                 </div>
                             )}
+
                         </div>
                         <button className={styles.btn} type='submit' disabled={status === 'sending'}>
                             {status === 'sending' ? 'Надсилаємо...' : 'ВІдправити'}</button>
