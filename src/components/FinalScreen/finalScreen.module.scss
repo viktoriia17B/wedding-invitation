@@ -19,7 +19,7 @@
     @include m.fullscreen-layout();
 
     .content {
-        @include m.content-layout;
+        @include m.content-layout();
         position: relative;
         z-index: 1;
     }

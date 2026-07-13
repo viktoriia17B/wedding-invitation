@@ -58,11 +58,7 @@ const RsvpForm = forwardRef(({ endpoint, backgroundImg }, ref) => {
                     <div className={styles.top}>
                         <h2 className={styles.title}>Анкета гостя</h2>
                     </div>
-                    <div className={styles.formGroup}>
-                        <label htmlFor="name" className={styles.visuallyHidden}>Ваше ім'я</label>
-                        <input ref={nameInputRef} type='text' id="name" name="name" required className={styles.inputField} value={formData.name}
-                            onChange={handleChange} placeholder="Ваше ім'я" />
-                    </div>
+
                     <form className={styles.form} onSubmit={handleSubmit}>
                         <div className={styles.formGroup}>
                             <p className={styles.groupLabel}>Чи зможете розділити з нами цей день?</p>
@@ -91,7 +87,11 @@ const RsvpForm = forwardRef(({ endpoint, backgroundImg }, ref) => {
                                     </div>
                                 </div>
                             )}
-
+                            <div className={styles.formGroup}>
+                                <label htmlFor="name" className={styles.visuallyHidden}>Ваше ім'я</label>
+                                <input ref={nameInputRef} type='text' id="name" name="name" required className={styles.inputField} value={formData.name}
+                                    onChange={handleChange} placeholder="Ваше ім'я" />
+                            </div>
                         </div>
                         <button className={styles.btn} type='submit' disabled={status === 'sending'}>
                             {status === 'sending' ? 'Надсилаємо...' : 'ВІдправити'}</button>

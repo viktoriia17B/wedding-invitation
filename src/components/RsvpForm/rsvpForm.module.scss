@@ -26,35 +26,40 @@
 .rsvp {
     width: 100%;
     min-height: 100dvh;
-    overflow: hidden;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     background-color: v.$color-light-green;
 
     .content {
-        @include m.content-layout;
+        @include m.content-layout(flex-start);
     }
 
     .top {
-        @include m.section-block($margin-bottom: auto);
-        justify-content: flex-start;
+        @include m.section-block();
         padding-top: clamp(12px, 3vh, 24px);
     }
 
     .title {
         @include m.title-base(v.$color-text-accent-gold);
+
     }
 
     .form {
-        @include m.section-block();
+        @include m.section-block($margin-top: clamp(20px, 8dvh, 60px));
         gap: 16px;
-        max-width: clamp(320px, 65vw, 560px);
+        flex-shrink: 0;
+        max-width: 500px;
     }
 
     .formGroup {
-        @include m.content-layout;
-        max-width: clamp(300px, 60vw, 520px);
-        margin: 0 auto 20px auto;
+        @include m.section-block();
+        justify-content: flex-start;
+        gap: clamp(12px, 2.5dvh, 20px);
+        max-width: 500px;
+        padding: 0;
+
+
     }
 
     .visuallyHidden {

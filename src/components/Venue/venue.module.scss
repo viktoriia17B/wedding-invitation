@@ -10,7 +10,7 @@
     background-color: v.$color-light-green;
 
     .content {
-        @include m.content-layout;
+        @include m.content-layout();
     }
 
     .top {
@@ -30,7 +30,7 @@
     }
 
     .card {
-        @include m.content-layout;
+        @include m.content-layout();
         background: rgba(169, 207, 164, 0.05);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(198, 221, 192, 0.08);

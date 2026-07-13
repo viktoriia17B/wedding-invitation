@@ -32,7 +32,7 @@
     @include m.section-overlay;
 
     .content {
-        @include m.content-layout;
+        @include m.content-layout();
         position: relative; // Без relative z-index не працюватиме!
         z-index: 2; // Ставимо поверх фону (який має індекс 1)
 
