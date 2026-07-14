@@ -1,16 +1,40 @@
-# React + Vite
+# Wedding Invitation 🕊️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Односторінкове весільне запрошення (React 19 + Vite + SCSS): відлік до дати, локації, RSVP-анкета з відправкою у Formspree.
 
-Currently, two official plugins are available:
+**Прод:** https://viktoriia17b.github.io/wedding-invitation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Запуск проєкту
 
-## React Compiler
+### Розробка (з миттєвим оновленням змін)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install        # один раз після клонування
+npm run dev
+```
 
-## Expanding the ESLint configuration
+Відкрити `http://localhost:5173/wedding-invitation/` — базовий шлях `/wedding-invitation/` обов'язковий, на корені буде 404. Працює HMR: зберіг файл — зміни одразу в браузері.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Перевірка продакшн-збірки локально
+
+```bash
+npm run build      # збірка у dist/
+npm run preview
+```
+
+Відкрити `http://localhost:4173/wedding-invitation/`. Це готовий білд без відстеження змін — для фінальної перевірки перед деплоєм.
+
+### Інші команди
+
+```bash
+npm run lint       # ESLint
+npm run deploy     # ручний деплой на гілку gh-pages (легасі-шлях)
+```
+
+## Деплой
+
+Автоматичний: push у `main` запускає GitHub Actions (`.github/workflows/deploy.yml`), який збирає проєкт і публікує на GitHub Pages. У налаштуваннях репозиторію Pages → Source має бути **GitHub Actions**.
+
+## Контент
+
+Весь контент (імена, дата, тексти, локації, Formspree endpoint) — в одному файлі `src/data.js`.
