@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Гілка claude-1 — зміни</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: Georgia, 'Times New Roman', serif; max-width: 860px; margin: 0 auto; padding: 24px 20px 60px; line-height: 1.55; color: #1b2e24; background: #f6f8f6; }
+  @media (prefers-color-scheme: dark) { body { color: #eae5d9; background: #14201a; } a { color: #e1c28f; } }
+  h1 { font-size: 1.7rem; border-bottom: 2px solid #e1c28f; padding-bottom: 8px; }
+  h2 { font-size: 1.25rem; margin-top: 2em; }
+  code { font-family: ui-monospace, Menlo, monospace; font-size: 0.9em; background: rgba(128,128,128,0.15); padding: 1px 5px; border-radius: 4px; }
+  .meta { opacity: 0.75; font-size: 0.95rem; }
+  .commit { opacity: 0.65; font-size: 0.85rem; font-family: ui-monospace, Menlo, monospace; }
+  li { margin: 6px 0; }
+</style>
+</head>
+<body>
+<h1>Гілка <code>claude-1</code>: підсумок змін</h1>
+<p class="meta">База: <code>c336de9</code> (main) · 18 комітів · ~40 файлів, +700/−220 рядків · липень 2026.
+Мета гілки — довести односторінкове весільне запрошення (React 19 + Vite) до стану, готового до розсилки гостям.
+Пріоритет — виключно мобільна версія.</p>
+
+<h2>1. Деплой та інфраструктура</h2>
+<ul>
+  <li><span class="commit">7a80dde</span> Workflow деплою перенесено з помилкового шляху <code>src/github/workflows</code> у робочий <code>.github/workflows/deploy.yml</code> — публікація на GitHub Pages тепер автоматична з пушу в <code>main</code> (джерело Pages треба перемкнути на «GitHub Actions»; <code>npm run deploy</code> через gh-pages лишився як легасі-шлях).</li>
+  <li><span class="commit">3ed9ca2</span> README замінено з шаблонного Vite-тексту на реальні інструкції запуску проєкту.</li>
+  <li><span class="commit">f85f236</span> Скрипт <code>npm run build:nginx</code> — збірка з <code>--base=/</code> для хостингу в корені домену (локальний nginx для тестів з телефона), тоді як стандартний <code>build</code> лишає base <code>/wedding-invitation/</code> для Pages.</li>
+</ul>
+
+<h2>2. Фонова музика та сумісність аудіо</h2>
+<ul>
+  <li><span class="commit">050393c</span> Доданий mp3-фолбек (<code>src/assets/audio/hatrsyzy.mp3</code>): Safari не грає ogg, тож <code>useAudio</code> обирає формат через <code>canPlayType</code>. Аудіо створюється ліниво після першої взаємодії (обхід autoplay-обмежень), кнопка перемикання з'являється після першого запуску.</li>
+</ul>
+
+<h2>3. Прев'ю посилання та захист форми</h2>
+<ul>
+  <li><span class="commit">77e95e8</span> OG-теги + <code>public/og-image.jpg</code> — у месенджерах посилання розгортається карткою з фото і описом. У форму доданий honeypot <code>_gotcha</code> (Formspree відсіює ботів). Рефи переведені на синтаксис React 19.</li>
+</ul>
+
+<h2>4. Архітектура скролу (найбільша зміна)</h2>
+<ul>
+  <li><span class="commit">2b624a4</span> Посекційний скрол: CSS scroll-snap (<code>y mandatory</code> + <code>scroll-snap-stop: always</code>) — один жест гортає рівно одну повноекранну секцію; хук <code>useWheelSnap</code> допомагає wheel-жестам на межах секцій.</li>
+  <li><span class="commit">6b14ee1</span> Ключовий фікс тремтіння і перестрибувань на мобільних: скрол перенесено з документа у внутрішній контейнер <code>.snap-scroller</code> (<code>html/body/#root</code> — <code>overflow: hidden</code>). Документ не скролиться → мобільний браузер не ховає адресний рядок → висота в'юпорта стабільна → snap-точки не зсуваються і секції не «налазять» одна на одну. Секції — <code>min-height: 100%</code> контейнера замість viewport-одиниць. Програмні скроли (кнопка Hero, крапки навігації, wheel) ідуть через <code>snapScrollTo()</code> (<code>src/utils/snapScroll.js</code>), який на час smooth-анімації вимикає snap (інакше mandatory-snap б'ється з анімацією — ривки). У <code>useWheelSnap</code> — лок з продовженням на кожну інерційну подію: хвіст інерції трекпада не перегортає зайву секцію.</li>
+</ul>
+
+<h2>5. Візуальний поліш</h2>
+<ul>
+  <li><span class="commit">4b6ce27</span> Контраст тексту на фото (градієнтні скріми зверху/знизу), охайніший таймер зворотного відліку.</li>
+  <li><span class="commit">cab9c2a</span> Плавна поява контенту секцій при першому вході у в'юпорт (<code>useRevealSections</code> на IntersectionObserver, замінив <code>useScrollTrigger</code>), крапкова навігація по секціях (<code>DotNav</code>), декоративні розділювачі (<code>Divider</code>), іконки.</li>
+  <li><span class="commit">c2c7c56</span> Секція локацій вміщається у в'юпорт малих телефонів (clamp-розміри від висоти екрана).</li>
+  <li><span class="commit">2f0e016, abfd7f1, 964caaa</span> Ітерації привітального тексту: більший кегль, золотий каліграфічний акцентний рядок — текст читається як звернення, а не примітка.</li>
+</ul>
+
+<h2>6. Типографіка</h2>
+<ul>
+  <li><span class="commit">8ce0a0f</span> Елегантна весільна пара шрифтів замість Montserrat/Marck Script: <strong>EB Garamond</strong> (основний — заголовки, текст, форма; табличні цифри, щоб таймер не «сіпався») і <strong>Great Vibes</strong> (каліграфія — імена пари, акцентні рядки); Cormorant Garamond лишився для курсивних підзаголовків. Усі три покривають українську кирилицю. Шрифти <strong>самохостяться</strong> через <code>@fontsource</code>-пакети в бандлі — Google Fonts CDN блокується приватними браузерами/Pi-hole, і гості бачили б системні фолбеки.</li>
+</ul>
+
+<h2>7. Форма RSVP</h2>
+<ul>
+  <li><span class="commit">24770e7</span> Фікс поламаного відображення після відправки: <code>FinalScreen</code> рендерив вкладений <code>&lt;section&gt;</code> — той отримував власну snap-точку і колапсував по висоті. Тепер це <code>&lt;div&gt;</code> із <code>flex: 1</code>, який заповнює секцію; wheel-обробник враховує лише секції верхнього рівня.</li>
+  <li><span class="commit">4123a71</span> Дружній текст помилки відправки з фолбеком «напишіть нам в особисті» — щоб заявка гостя не губилась мовчки при мережевих блокуваннях. (Сама причина помилки на тестовому стенді була серверною: CSP nginx без <code>formspree.io</code> у <code>connect-src</code> — виправлено в конфігурації сервера, поза цим репозиторієм.)</li>
+</ul>
+
+<h2>8. Гігієна репозиторію</h2>
+<ul>
+  <li>З історії гілки прибрано інструментальні файли асистента (<code>CLAUDE.md</code>, тека <code>.claude/</code>) — вони лишаються локально і додані в <code>.gitignore</code>; цей звіт (<code>branch-claude-1.html</code>) — фінальний коміт гілки.</li>
+</ul>
+</body>
+</html>

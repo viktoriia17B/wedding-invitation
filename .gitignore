@@ -23,5 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# Claude Code local settings
-.claude/settings.local.json
+# Claude Code assistant files — local only, kept out of git history
+CLAUDE.md
+.claude/
