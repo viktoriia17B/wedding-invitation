@@ -47,17 +47,21 @@
 
     .text {
         @include m.section-block();
-        margin-top: clamp(20px, 10vh, 100px);
-        background-color: rgba(36, 48, 29, 0.2); // Темніший зелений підтон для об'єму
-        border-radius: 12px;
-        max-width: clamp(280px, 66vw, 659px);
-        transform: translateY(-50px);
+        margin-top: clamp(20px, 8vh, 80px);
+        // Виразна «цитата», а не примітка: щільніший скрім і золота рамка
+        background-color: rgba(27, 46, 36, 0.45);
+        border: 1px solid rgba(225, 194, 143, 0.25);
+        border-radius: 14px;
+        padding: clamp(16px, 2.5dvh, 28px) clamp(18px, 4vw, 36px);
+        max-width: clamp(300px, 70vw, 680px);
+        transform: translateY(-40px);
         @include m.accent-text-base($font: v.$font-serif,
-            $size: v.$size-subtitle,
-            $color: v.$color-text-light,
-            $shadow: 2px 2px 4px v.$color-shadow );
-        font-style: italic;
+            $size: clamp(1.4rem, 5dvw, 2.2rem),
+            $color: v.$color-text-main,
+            $shadow: 0 2px 6px rgba(0, 0, 0, 0.5));
+        font-weight: 500;
+        line-height: 1.5;
+        letter-spacing: 0.3px;
         text-wrap: balance;
-
     }
 }
