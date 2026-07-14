@@ -25,7 +25,8 @@
 
 .rsvp {
     width: 100%;
-    min-height: 100dvh;
+    // 100% of .snap-scroller — see fullscreen-layout mixin
+    min-height: 100%;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;

@@ -1,10 +1,9 @@
+import { snapScrollTo } from '../../utils/snapScroll';
 import styles from './hero.module.scss';
 
 const Hero = ({ title, name, backgroundImg, nextSectionRef, onPlayAudio }) => {
     const handleStartScroll = () => {
-        if (nextSectionRef.current) {
-            nextSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        }
+        snapScrollTo(nextSectionRef.current);
         onPlayAudio();
     }
     return (

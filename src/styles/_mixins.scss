@@ -61,7 +61,9 @@
 
 @mixin fullscreen-layout {
     width: 100%;
-    min-height: 100dvh;
+    // 100% of .snap-scroller, not viewport units: the scroller has a fixed
+    // height, so sections always match it exactly and snap points never move
+    min-height: 100%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -76,7 +78,8 @@
 
 @mixin section-overlay {
     width: 100%;
-    min-height: 100dvh;
+    // 100% of .snap-scroller — see fullscreen-layout
+    min-height: 100%;
     position: relative;
     background-color: #1b2e24;
     overflow: hidden;

@@ -20,7 +20,9 @@ function App() {
   useWheelSnap();
   useRevealSections();
   return (
-    <div>
+    // Inner scroll container: the document itself never scrolls, so the mobile
+    // URL bar never collapses/expands and the viewport height stays stable
+    <div className="snap-scroller">
       <DotNav />
       {showBtn && <BtnPage isPlaying={isPlaying} onToggle={toggleAudio} />}
       <Hero title={title} name={couple} backgroundImg={base} nextSectionRef={countDownRef} onPlayAudio={playAudio} />

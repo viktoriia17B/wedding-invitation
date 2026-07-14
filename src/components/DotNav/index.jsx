@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { snapScrollTo, getScroller } from '../../utils/snapScroll';
 import styles from './dotNav.module.scss';
 
 const SECTIONS = ['Головна', 'Дата весілля', 'Запрошення', 'Локації', 'Анкета гостя'];
@@ -6,24 +7,26 @@ const SECTIONS = ['Головна', 'Дата весілля', 'Запрошен
 const DotNav = () => {
     const [active, setActive] = useState(0);
     useEffect(() => {
+        const scroller = getScroller();
+        if (!scroller) return;
         let raf = 0;
         const onScroll = () => {
             cancelAnimationFrame(raf);
             raf = requestAnimationFrame(() => {
                 const sections = [...document.querySelectorAll('#root > div > section')];
-                const middle = window.scrollY + window.innerHeight / 2;
+                const base = scroller.getBoundingClientRect().top;
+                const middle = scroller.scrollTop + scroller.clientHeight / 2;
                 const idx = sections.findLastIndex(s =>
-                    s.getBoundingClientRect().top + window.scrollY <= middle);
+                    s.getBoundingClientRect().top - base + scroller.scrollTop <= middle);
                 setActive(Math.max(idx, 0));
             });
         };
         onScroll();
-        window.addEventListener('scroll', onScroll, { passive: true });
-        return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf); };
+        scroller.addEventListener('scroll', onScroll, { passive: true });
+        return () => { scroller.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf); };
     }, []);
     const goTo = (i) => {
-        document.querySelectorAll('#root > div > section')[i]
-            ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        snapScrollTo(document.querySelectorAll('#root > div > section')[i]);
     };
     return (
         <nav className={styles.dotNav} aria-label="Розділи запрошення">

@@ -3,9 +3,29 @@
 @use 'reset'; // Імпортуємо скидання стилів
 
 
-html {
+// Документ не скролиться взагалі: скрол живе у .snap-scroller. Інакше мобільний
+// браузер ховає/показує адресний рядок на скролі документа, в'юпорт «дихає»
+// і секції з'їжджають одна на одну.
+html,
+body,
+#root {
+    height: 100%;
+    overflow: hidden;
+}
+
+.snap-scroller {
+    height: 100vh; // fallback for browsers without dvh
+    height: 100dvh;
+    overflow-y: auto;
+    overscroll-behavior-y: none; // без гумового відскоку в документ
     // Малий жест скролу «примагнічує» до найближчої секції
     scroll-snap-type: y mandatory;
+
+    // snapScrollTo() suspends snapping during programmatic smooth scroll,
+    // otherwise mandatory snap re-snaps mid-animation and the page jerks
+    &.no-snap {
+        scroll-snap-type: none;
+    }
 }
 
 section {
