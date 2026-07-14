@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import FinalScreen from "../FinalScreen";
+import Divider from '../Divider';
 import styles from './rsvpForm.module.scss';
 import { ATTENDANCE_OPTIONS, ALCOHOL_OPTIONS } from "./rsvpOptions";
 const RsvpForm = ({ endpoint, backgroundImg }) => {
@@ -56,6 +57,7 @@ const RsvpForm = ({ endpoint, backgroundImg }) => {
                 <div className={styles.content}>
                     <div className={styles.top}>
                         <h2 className={styles.title}>Анкета гостя</h2>
+                        <Divider />
                     </div>
 
                     <form className={styles.form} onSubmit={handleSubmit}>

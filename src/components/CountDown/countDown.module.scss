@@ -1,6 +1,18 @@
 @use '../../styles/variables' as v;
 @use '../../styles/mixins' as m;
 
+@keyframes tickFade {
+    from {
+        opacity: 0.15;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
 .countdown {
     @include m.fullscreen-layout();
 
@@ -75,6 +87,12 @@
     }
 
     .timeValue {
+        animation: tickFade 0.45s ease;
+
+        @media (prefers-reduced-motion: reduce) {
+            animation: none;
+        }
+
         font-family: v.$font-main;
         font-size: clamp(1.6rem, 4vw, 2.5rem);
         font-weight: 400; // Тонкі витончені цифри

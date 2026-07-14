@@ -1,4 +1,5 @@
 import { getMapLink } from '../../utils/getMapLink';
+import Divider from '../Divider';
 import styles from './venue.module.scss';
 const Venue = ({ locations }) => {
     return (
@@ -6,6 +7,7 @@ const Venue = ({ locations }) => {
             <div className={styles.content}>
                 <div className={styles.top}>
                     <h2 className={styles.title}>Місце проведення</h2>
+                    <Divider />
                 </div>
                 <div className={styles.cardsContainer}>
                     {locations.map(({ id, label, time, title, location, coords }) => (

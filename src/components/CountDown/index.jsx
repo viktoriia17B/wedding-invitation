@@ -29,7 +29,8 @@ const CountDown = ({ ref, subtitle, names, targetDate, backgroundImg }) => {
                             <p className={styles.welcome}>Побачимось з вами через...</p>
                             <div className={styles.timer}>
                                 {units.map(unit => (<div className={styles.timeBlock} key={unit.id}>
-                                    <span className={styles.timeValue}>{unit.value}</span>
+                                    {/* key={value} перемонтовує span і перезапускає анімацію зміни цифри */}
+                                    <span key={unit.value} className={styles.timeValue}>{unit.value}</span>
                                     <span className={styles.timeLabel}>{unit.label}</span>
                                 </div>))}
                             </div>

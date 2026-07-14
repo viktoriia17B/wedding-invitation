@@ -1,0 +1,10 @@
+@use '../../styles/variables' as v;
+
+.divider {
+    display: block;
+    margin: clamp(10px, 2dvh, 18px) auto;
+    color: v.$color-text-accent-gold;
+    width: clamp(120px, 20vw, 180px);
+    height: auto;
+    flex-shrink: 0;
+}

@@ -89,4 +89,34 @@
             transform: translateY(0);
         }
     }
+
+    .scrollHint {
+        margin-top: 14px;
+        padding: 4px;
+        background: transparent;
+        border: none;
+        color: rgba(244, 241, 234, 0.75);
+        cursor: pointer;
+        animation: hintBounce 2.2s ease-in-out infinite;
+
+        &:hover {
+            color: v.$color-text-accent-gold;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            animation: none;
+        }
+    }
+}
+
+@keyframes hintBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(7px);
+    }
 }

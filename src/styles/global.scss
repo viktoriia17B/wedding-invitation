@@ -13,6 +13,20 @@ section {
     scroll-snap-stop: always; // один жест = одна секція, без прольоту повз
 }
 
+// Fade-up контенту секції при першій появі (data-visible ставить useRevealSections)
+@media (prefers-reduced-motion: no-preference) {
+    #root>div>section>div {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    #root>div>section[data-visible='true']>div {
+        opacity: 1;
+        transform: none;
+    }
+}
+
 body {
     font-family: v.$font-main;
     font-size: v.$size-body-text;
