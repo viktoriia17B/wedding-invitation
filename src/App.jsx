@@ -25,7 +25,7 @@ function App() {
       {showBtn && <BtnPage isPlaying={isPlaying} onToggle={toggleAudio} />}
       <Hero title={title} name={couple} backgroundImg={base} nextSectionRef={countDownRef} onPlayAudio={playAudio} />
       <CountDown ref={countDownRef} subtitle={subtitle} names={invertedNames} targetDate={date} backgroundImg={hero} />
-      <Welcome title={greeting.title} text={greeting.text} backgroundImg={base} iconImg={icon} />
+      <Welcome title={greeting.title} text={greeting.text} accent={greeting.accent} backgroundImg={base} iconImg={icon} />
       <Venue locations={locations} />
       <RsvpForm endpoint={endpoint} backgroundImg={story} />
     </div>

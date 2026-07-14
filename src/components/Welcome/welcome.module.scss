@@ -47,7 +47,7 @@
 
     .text {
         @include m.section-block();
-        margin-top: clamp(20px, 8vh, 80px);
+        margin-top: clamp(12px, 5vh, 70px);
         // Виразна «цитата», а не примітка: щільніший скрім і золота рамка
         background-color: rgba(27, 46, 36, 0.45);
         border: 1px solid rgba(225, 194, 143, 0.25);
@@ -56,12 +56,24 @@
         max-width: clamp(300px, 70vw, 680px);
         transform: translateY(-40px);
         @include m.accent-text-base($font: v.$font-serif,
-            $size: clamp(1.7rem, 6.5dvw, 2.7rem),
+            $size: clamp(1.9rem, 7dvw, 3rem),
             $color: v.$color-text-main,
             $shadow: 0 2px 6px rgba(0, 0, 0, 0.5));
         font-weight: 500;
-        line-height: 1.5;
+        line-height: 1.45;
         letter-spacing: 0.3px;
         text-wrap: balance;
+    }
+
+    // Ключова фраза — окремим рядком, рукописним шрифтом і золотом
+    .accent {
+        display: block;
+        margin-top: clamp(6px, 1dvh, 12px);
+        font-family: v.$font-accent;
+        font-size: clamp(2.2rem, 8.5dvw, 3.6rem);
+        color: v.$color-text-accent-gold;
+        line-height: 1.2;
+        letter-spacing: 0;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
     }
 }
