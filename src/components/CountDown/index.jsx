@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { forwardRef } from "react";
 import { calculateTimeLeft } from "../../utils/timeUtils";
 import { useScrollTrigger } from "../../hooks/useScrollTrigger";
 import styles from './countDown.module.scss'
-const CountDown = forwardRef(({ subtitle, names, targetDate, backgroundImg, scrollTargetRef }, ref) => {
+const CountDown = ({ ref, subtitle, names, targetDate, backgroundImg, scrollTargetRef }) => {
     const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft(targetDate));
     useEffect(() => {
         let timer = setInterval(() => setTimeLeft(calculateTimeLeft(targetDate)), 1000);
@@ -21,7 +20,7 @@ const CountDown = forwardRef(({ subtitle, names, targetDate, backgroundImg, scro
             <div className={styles.content}>
                 <div className={styles.top}>
                     <p className={styles.subtitle}>{subtitle}</p>
-                    <p className={styles.date}>{targetDate.split('-').reverse().join('.')}</p>
+                    <p className={styles.date}>{targetDate.slice(0, 10).split('-').reverse().join('.')}</p>
                 </div>
                 <div className={styles.center}> <h2 className={styles.names}>{names}</h2>
                 </div>
@@ -38,5 +37,5 @@ const CountDown = forwardRef(({ subtitle, names, targetDate, backgroundImg, scro
             </div>
         </section >
     )
-});
+};
 export default CountDown;

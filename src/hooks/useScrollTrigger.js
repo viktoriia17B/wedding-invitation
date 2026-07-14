@@ -13,7 +13,7 @@ export const useScrollTrigger = (options = {}) => {
                 isFirstCall.current = false;
                 return;
             }
-            if (entry.isIntersecting ?? scrollTargetRef?.current) {
+            if (entry.isIntersecting && scrollTargetRef?.current) {
                 setTimeout(() => {
                     // Скролимо до явно переданого рефа, а не шукаємо в DOM
                     scrollTargetRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });

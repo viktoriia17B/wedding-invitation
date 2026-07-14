@@ -15,7 +15,7 @@ export const DATA = deepFreeze({
     title: 'Запрошення на весілля',
     subtitle: 'Дата весілля',
     couple: 'Віталій і Вікторія',
-    date: '2026-09-05',
+    date: '2026-09-05T11:00:00+03:00',
     endpoint: 'https://formspree.io/f/meebbjaw',
     greeting: {
         title: 'Увага, найкращі люди!',
@@ -46,6 +46,11 @@ export const DATA = deepFreeze({
         hero: new URL('./assets/images/wedding-hero.webp', import.meta.url).href,
         icon: new URL('./assets/images/wingsIcon.png', import.meta.url).href
     },
-    audio: { bgMusic: new URL('./assets/audio/hatrsyzy.ogg', import.meta.url).href }
+    audio: {
+        bgMusic: {
+            ogg: new URL('./assets/audio/hatrsyzy.ogg', import.meta.url).href,
+            mp3: new URL('./assets/audio/hatrsyzy.mp3', import.meta.url).href
+        }
+    }
 })
 

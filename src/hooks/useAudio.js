@@ -1,17 +1,20 @@
-import { useState, useREf, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 export const useAudio = (music) => {
     const audioRef = useRef(null);
-    const [isPlaying, setIsPalying] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
     const [showBtn, setShowBtn] = useState(false);
     const playAudio = () => {
         if (!audioRef.current) {
-            audioRef.current = new Audio(music);
-            audioRef.current.loop = true;// Музика буде повторюватися по колу
-            audioRef.current.volume = 0.5;
+            const audio = new Audio();
+            // Safari/iOS не відтворює OGG Vorbis — обираємо підтримуваний формат
+            audio.src = audio.canPlayType('audio/ogg; codecs="vorbis"') ? music.ogg : music.mp3;
+            audio.loop = true;// Музика буде повторюватися по колу
+            audio.volume = 0.5;
+            audioRef.current = audio;
         }
         return audioRef.current.play()
             .then(() => {
-                setIsPalying(true);
+                setIsPlaying(true);
                 setShowBtn(true);
             })
             .catch(err => {
@@ -23,9 +26,9 @@ export const useAudio = (music) => {
         if (!audioRef.current) return;
         if (isPlaying) {
             audioRef.current.pause();
-            setIsPalying(false);
+            setIsPlaying(false);
         } else {
-            audioRef.current.play().then(() => setIsPalying(true));
+            audioRef.current.play().then(() => setIsPlaying(true));
         }
     };
     useEffect(() => {
