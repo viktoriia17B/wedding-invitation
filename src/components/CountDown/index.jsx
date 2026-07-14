@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import { calculateTimeLeft, ukPlural } from "../../utils/timeUtils";
-import { useScrollTrigger } from "../../hooks/useScrollTrigger";
 import styles from './countDown.module.scss'
-const CountDown = ({ ref, subtitle, names, targetDate, backgroundImg, scrollTargetRef }) => {
+const CountDown = ({ ref, subtitle, names, targetDate, backgroundImg }) => {
     const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft(targetDate));
     useEffect(() => {
         let timer = setInterval(() => setTimeLeft(calculateTimeLeft(targetDate)), 1000);
         return () => clearInterval(timer)
     }, [targetDate]);
-    const [triggerRef] = useScrollTrigger({ scrollTargetRef });
     const units = [
         { id: 'days', value: timeLeft.days, label: ukPlural(timeLeft.days, ['день', 'дні', 'днів']) },
         { id: 'hours', value: timeLeft.hours, label: ukPlural(timeLeft.hours, ['година', 'години', 'годин']) },
@@ -38,7 +36,6 @@ const CountDown = ({ ref, subtitle, names, targetDate, backgroundImg, scrollTarg
                         </>
                     )}
                 </div>
-                <div ref={triggerRef} className={styles.scrollTrigger} />
             </div>
         </section >
     )

@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { useAudio } from './hooks/useAudio';
+import { useWheelSnap } from './hooks/useWheelSnap';
 import { DATA } from './data';
 import Hero from './components/Hero';
 import BtnPage from './components/BtnPage';
@@ -13,18 +14,16 @@ const invertedNames = reverseCouple(couple);
 
 function App() {
   const countDownRef = useRef(null);
-  const welcomeRef = useRef(null);
-  const venueRef = useRef(null);
-  const rsvpRef = useRef(null);
   const { isPlaying, showBtn, playAudio, toggleAudio } = useAudio(bgMusic);
+  useWheelSnap();
   return (
     <div>
       {showBtn && <BtnPage isPlaying={isPlaying} onToggle={toggleAudio} />}
       <Hero title={title} name={couple} backgroundImg={base} nextSectionRef={countDownRef} onPlayAudio={playAudio} />
-      <CountDown ref={countDownRef} subtitle={subtitle} names={invertedNames} targetDate={date} backgroundImg={hero} scrollTargetRef={welcomeRef} />
-      <Welcome ref={welcomeRef} title={greeting.title} text={greeting.text} backgroundImg={base} iconImg={icon} scrollTargetRef={venueRef} />
-      <Venue ref={venueRef} locations={locations} scrollTargetRef={rsvpRef} />
-      <RsvpForm ref={rsvpRef} endpoint={endpoint} backgroundImg={story} />
+      <CountDown ref={countDownRef} subtitle={subtitle} names={invertedNames} targetDate={date} backgroundImg={hero} />
+      <Welcome title={greeting.title} text={greeting.text} backgroundImg={base} iconImg={icon} />
+      <Venue locations={locations} />
+      <RsvpForm endpoint={endpoint} backgroundImg={story} />
     </div>
   )
 }

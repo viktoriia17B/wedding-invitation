@@ -1,10 +1,8 @@
 import { getMapLink } from '../../utils/getMapLink';
-import { useScrollTrigger } from '../../hooks/useScrollTrigger';
 import styles from './venue.module.scss';
-const Venue = ({ ref, locations, scrollTargetRef }) => {
-    const [triggerRef] = useScrollTrigger({ scrollTargetRef })
+const Venue = ({ locations }) => {
     return (
-        <section ref={ref} className={styles.venue}>
+        <section className={styles.venue}>
             <div className={styles.content}>
                 <div className={styles.top}>
                     <h2 className={styles.title}>Місце проведення</h2>
@@ -24,7 +22,6 @@ const Venue = ({ ref, locations, scrollTargetRef }) => {
                     <h3 className={styles.footerTitle}>Підтвердження присутності</h3>
                     <p className={styles.footerText}>Будь ласка, надайте відповідь про вашу присутність на весіллі до 10 серпня!</p>
                 </div>
-                <div ref={triggerRef} className={styles.scrollTrigger} />
             </div>
         </section>
     )

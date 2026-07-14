@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import FinalScreen from "../FinalScreen";
 import styles from './rsvpForm.module.scss';
 import { ATTENDANCE_OPTIONS, ALCOHOL_OPTIONS } from "./rsvpOptions";
-const RsvpForm = ({ ref, endpoint, backgroundImg }) => {
+const RsvpForm = ({ endpoint, backgroundImg }) => {
     const nameInputRef = useRef(null);
     const [formData, setFormData] = useState({
         name: '',
@@ -51,7 +51,7 @@ const RsvpForm = ({ ref, endpoint, backgroundImg }) => {
     };
 
     return (
-        <section ref={ref} className={styles.rsvp}>
+        <section className={styles.rsvp}>
             {status === 'sent' ? (<FinalScreen backgroundImg={backgroundImg} {...formData} />) : (
                 <div className={styles.content}>
                     <div className={styles.top}>
