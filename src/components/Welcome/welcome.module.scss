@@ -29,7 +29,7 @@
     .icon {
         display: block;
         margin: auto;
-        width: 60%;
+        width: min(60%, 40dvh); // на низьких екранах іконка не з'їдає висоту
         height: auto;
         opacity: 0.6;
         // Перефарбовуємо лілову іконку в золото палітри

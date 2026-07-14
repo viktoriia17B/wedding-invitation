@@ -111,7 +111,7 @@
     align-items: center;
     padding: clamp(12px, 4vw, 20px) clamp(16px, 5vw, 20px);
     box-sizing: border-box;
-    gap: clamp(20px, 5dvh, 40px); // відступи між дітьми
+    gap: clamp(16px, 3dvh, 40px); // відступи між дітьми, стискаються на низьких екранах
 }
 
 @mixin section-block($align: center, $margin-bottom: 0, $margin-top: 0) {
