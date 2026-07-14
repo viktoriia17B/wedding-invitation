@@ -55,7 +55,7 @@
     }
 
     .names {
-        @include m.accent-text-base($shadow: 2px 4px 10px v.$color-text-accent-gold);
+        @include m.accent-text-base($shadow: 0 2px 8px rgba(0, 0, 0, 0.55));
         font-weight: 400;
     }
 

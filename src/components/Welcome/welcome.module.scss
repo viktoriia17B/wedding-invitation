@@ -32,6 +32,8 @@
         width: 60%;
         height: auto;
         opacity: 0.6;
+        // Перефарбовуємо лілову іконку в золото палітри
+        filter: sepia(1) saturate(1.6) hue-rotate(-8deg) brightness(1.05);
         transform-origin: center center;
         animation: wingFlap 2.5s ease-in-out infinite alternate;
         // Захист від розмиття картинки при масштабуванні браузером

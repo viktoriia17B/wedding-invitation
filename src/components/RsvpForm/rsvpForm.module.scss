@@ -41,12 +41,11 @@
     }
 
     .title {
-        @include m.title-base(v.$color-text-accent-gold);
-
+        @include m.title-base();
     }
 
     .form {
-        @include m.section-block($margin-top: clamp(20px, 8dvh, 60px));
+        @include m.section-block($margin-top: clamp(16px, 3dvh, 32px));
         gap: 16px;
         flex-shrink: 0;
         max-width: 500px;
@@ -83,9 +82,10 @@
 
     .inputField {
         width: 100%;
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.08);
         border: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+        border-radius: 8px 8px 0 0;
         padding: 12px 8px;
         color: v.$color-white;
         font-family: v.$font-main;
@@ -145,6 +145,8 @@
 
     .btn {
         @include m.button-base();
+        padding: 14px 40px;
+        font-size: 0.85rem;
     }
 
     .error {

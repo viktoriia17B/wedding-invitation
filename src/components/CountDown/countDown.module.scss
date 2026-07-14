@@ -15,8 +15,8 @@
     }
 
     .subtitle {
-        @include m.title-base(v.$color-deep-green);
-        text-shadow: 2px 2px 4px v.$color-shadow;
+        @include m.title-base();
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
         margin: 0;
     }
 
@@ -28,13 +28,10 @@
         margin: 0;
     }
 
-    .center {
-        @include m.section-block();
-    }
-
     .names {
-        @include m.accent-text-base($shadow: 2px 4px 10px v.$color-text-accent-gold);
+        @include m.accent-text-base($shadow: 0 2px 8px rgba(0, 0, 0, 0.55));
         font-weight: 400;
+        margin-bottom: 4px;
     }
 
     .bottom {
@@ -81,6 +78,7 @@
         font-family: v.$font-main;
         font-size: clamp(1.6rem, 4vw, 2.5rem);
         font-weight: 400; // Тонкі витончені цифри
+        font-variant-numeric: tabular-nums; // цифри однакової ширини — блоки не сіпаються
         line-height: 1;
         margin-bottom: 6px;
         color: v.$color-white;
