@@ -98,7 +98,7 @@ const RsvpForm = ({ endpoint, backgroundImg }) => {
                         </div>
                         <button className={styles.btn} type='submit' disabled={status === 'sending'}>
                             {status === 'sending' ? 'Надсилаємо...' : 'Відправити'}</button>
-                        {status === 'error' && (<p className={styles.error}>Щось пішло не так. Спробуйте пізніше.</p>)}
+                        {status === 'error' && (<p className={styles.error}>Ой, щось з інтернетом, не вдалося надіслати відповідь.<br />Будь ласка, напишіть нам в особисті.</p>)}
                     </form>
                 </div>)}
         </section>
