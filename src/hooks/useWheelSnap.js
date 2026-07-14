@@ -21,7 +21,8 @@ export const useWheelSnap = () => {
                 return;
             }
             const scroller = getScroller();
-            const sections = [...document.querySelectorAll('section')];
+            // top-level sections only — nested markup must not add snap targets
+            const sections = [...document.querySelectorAll('#root > div > section')];
             if (!scroller || !sections.length) return;
             const vh = scroller.clientHeight;
             const y = scroller.scrollTop;

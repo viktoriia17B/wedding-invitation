@@ -17,6 +17,10 @@
 
 .finalScreen {
     @include m.fullscreen-layout();
+    // fills the flex-column .rsvp section: min-height percentages don't
+    // resolve against a parent sized by min-height, flex-grow does
+    flex: 1;
+    justify-content: center;
 
     .content {
         @include m.content-layout();
