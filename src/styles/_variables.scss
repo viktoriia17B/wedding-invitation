@@ -8,8 +8,11 @@ $color-text-main: #f4f6f0; // основний текст
 $color-text-accent-gold: #e1c28f; // акцент
 $color-error: #e57373;
 // Шрифти
-$font-main: 'Montserrat', sans-serif;
-$font-accent: 'Marck Script', cursive;
+// EB Garamond: elegant serif with real weights, full Ukrainian Cyrillic
+// and tabular figures (countdown digits must not wobble)
+$font-main: 'EB Garamond', serif;
+// Great Vibes: classic wedding calligraphy, covers Ukrainian Cyrillic
+$font-accent: 'Great Vibes', cursive;
 $font-serif: 'Cormorant Garamond', serif;
 // Адаптивні розміри (ваші clamp)
 $size-title: clamp(1.6rem, 6dvw, 3.5rem);
