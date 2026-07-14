@@ -1,21 +1,20 @@
-import { forwardRef } from "react";
-import { useScrollTrigger } from "../../hooks/useScrollTrigger";
 import { useState, useRef, useEffect } from "react";
 import FinalScreen from "../FinalScreen";
 import styles from './rsvpForm.module.scss';
 import { ATTENDANCE_OPTIONS, ALCOHOL_OPTIONS } from "./rsvpOptions";
-const RsvpForm = forwardRef(({ endpoint, backgroundImg }, ref) => {
+const RsvpForm = ({ ref, endpoint, backgroundImg }) => {
     const nameInputRef = useRef(null);
     const [formData, setFormData] = useState({
         name: '',
         attending: 'yes',
-        alcohol: []
+        alcohol: [],
+        _gotcha: '' // Formspree honeypot: людина лишає поле порожнім, бот заповнює — заявка відхиляється
     });
     const [status, setStatus] = useState('idle');
     const hasFocusedForAlcohol = useRef(false); // реф, що зберігається між рендерами без запуску ре-рендеру;
     useEffect(() => {
         if (formData.attending === 'no') {
-            nameInputRef.current.focus();
+            nameInputRef.current?.focus();
         }
     }, [formData.attending]);
     useEffect(() => {
@@ -87,6 +86,8 @@ const RsvpForm = forwardRef(({ endpoint, backgroundImg }, ref) => {
                                     </div>
                                 </div>
                             )}
+                            <input type="text" name="_gotcha" value={formData._gotcha} onChange={handleChange}
+                                className={styles.visuallyHidden} tabIndex="-1" autoComplete="off" aria-hidden="true" />
                             <div className={styles.formGroup}>
                                 <label htmlFor="name" className={styles.visuallyHidden}>Ваше ім'я</label>
                                 <input ref={nameInputRef} type='text' id="name" name="name" required className={styles.inputField} value={formData.name}
@@ -94,11 +95,11 @@ const RsvpForm = forwardRef(({ endpoint, backgroundImg }, ref) => {
                             </div>
                         </div>
                         <button className={styles.btn} type='submit' disabled={status === 'sending'}>
-                            {status === 'sending' ? 'Надсилаємо...' : 'ВІдправити'}</button>
+                            {status === 'sending' ? 'Надсилаємо...' : 'Відправити'}</button>
                         {status === 'error' && (<p className={styles.error}>Щось пішло не так. Спробуйте пізніше.</p>)}
                     </form>
                 </div>)}
         </section>
     )
-});
+};
 export default RsvpForm;

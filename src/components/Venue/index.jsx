@@ -1,8 +1,7 @@
-import { forwardRef } from 'react';
 import { getMapLink } from '../../utils/getMapLink';
 import { useScrollTrigger } from '../../hooks/useScrollTrigger';
 import styles from './venue.module.scss';
-const Venue = forwardRef(({ locations, scrollTargetRef }, ref) => {
+const Venue = ({ ref, locations, scrollTargetRef }) => {
     const [triggerRef] = useScrollTrigger({ scrollTargetRef })
     return (
         <section ref={ref} className={styles.venue}>
@@ -29,5 +28,5 @@ const Venue = forwardRef(({ locations, scrollTargetRef }, ref) => {
             </div>
         </section>
     )
-});
+};
 export default Venue;
